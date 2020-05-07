@@ -153,6 +153,24 @@ class C_admin extends CI_Controller {
         $this->load->view('_partials/v_js');
     }
 
+    function edit_harga_kamar($no_kamar){
+        $data['judul_halaman'] = 'Edit Harga Kamar';
+        $data['username'] = $this->session->userdata('username');
+        $data['kamar'] = $this->m_data->detail_kamar(['no_kamar' => $no_kamar])->row();
+
+        if (!$data['kamar']) show_404();
+
+        $this->load->view('_partials/v_head', $data);
+        $this->load->view('_partials/v_header');
+        $this->load->view('_partials/v_sidebar', $data);
+        $this->load->view('_partials/v_breadcrump', $data);
+        $this->load->view('v_edit_harga_kamar', $data); //page content
+        $this->load->view('_partials/v_footer');
+        // $this->load->view('_partials/v_theme-config');
+        $this->load->view('_partials/v_preloader');
+        $this->load->view('_partials/v_js');
+    }
+
     function edit_penghuni($id = null){
 
         if (!isset($id)) redirect (base_url('daftar-penghuni'));
